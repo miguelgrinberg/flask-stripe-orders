@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Stripe and Flask Demo</title>
+    <style>
+      table {
+        border: 1px solid black;
+      }
+      table th {
+        padding: 10px;
+        background: #ddd;
+      }
+      table td {
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Stripe and Flask Demo</h1>
+    <table>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Order</th>
+      </tr>
+      {% for id in products %}
+      <tr>
+        <td>{{ products[id].name }}</td>
+        <td>
+          {{ "$%.2f"|format(products[id].price / 100) }} USD
+          {% if products[id].per %}per {{ products[id].per }}{% endif %}</td>
+        <td>
+          <form method="POST" action="/order/{{ id }}">
+            <input type="submit" value="Order Now!">
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
